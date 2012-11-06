@@ -1,0 +1,144 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+@{
+    ViewBag.Title = "AddNewAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+<title></title>
+<script type="text/javascript" language="javascript">
+    function AddNewAdminValidate() {
+        //debugger
+        //document.getElementById('commentsDiv').style.visibility = 'hidden';
+        if ('@ViewData["newadmin"]' == 'true') {
+            alert('Successfully account has been created, Please Note down System Generated Admin Code');
+            document.getElementById("Result").value = 'Please remember it, This is your Admin Code ' + '@ViewBag.Value';
+            document.getElementById("NewAdName").value ='';
+            document.getElementById("NewAdPass").value = '';
+            document.getElementById("NewAdPhone").value = '';
+            document.getElementById("NewAdAddress").value = '';
+            document.getElementById("NewAdDesign").value = '';
+            document.getElementById("NewAdCategory").value = '';
+        }
+        else if ('@ViewData["newadmin"]' == 'false') {
+            alert('Admin name aleardy exists, Please select new name');
+            location.replace('/Home/AddNewAdmin');
+            return false;
+        }
+        else if ('@ViewData["newadmin"]' == 'false1') {
+            alert('You are not authorized to create an account, Only Global administraor can create an account.');
+            location.replace('/Home/Admin');
+            return false;
+        }
+    }
+    function AddNewAdminUserValidate() {
+    //debugger
+        var NewAdName = document.getElementById("NewAdName").value;
+        var NewAdPass = document.getElementById("NewAdPass").value;
+        var NewAdPhone = document.getElementById("NewAdPhone").value;
+        var NewAdAddress = document.getElementById("NewAdAddress").value;
+        var NewAdDesign = document.getElementById("NewAdDesign").value;
+        var NewAdCategory = document.getElementById("NewAdCategory").value;
+        if ((NewAdName != '') && (NewAdPass != '') && (NewAdPhone != '') && (NewAdAddress != '') && (NewAdDesign != '') && (NewAdCategory != '--select--')) {
+            return true;
+        }
+        else {
+            alert('Please fill all fields, are mandatory');
+            location.replace('/Home/AddNewAdmin');
+            return false;
+        }
+    }
+    function isNumberKey(evt) {
+        //debugger
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode != 43 && (charCode < 48 || charCode > 57)) {
+            alert('Only numbers are allowed as Phone/Landline numbers.');
+            return false;
+        }
+        var regPhoneLength = document.getElementById("NewAdPhone").value;
+        if ((regPhoneLength.length > 10)) {
+            alert('It is not valid moblie/Landline numbers. Please verify it.');
+            return false;
+        }
+        return true;
+    }
+</script>
+</head>
+<body onload="AddNewAdminValidate();">
+<h2>Create new admin account here....</h2>
+@using (Html.BeginForm())
+{
+    <div id="admin">
+        <table class="specialBorderLessTD">
+            <tr>
+                <td class="specialBorderLessTD">
+                    Name
+                </td>
+                <td class="specialBorderLessTD">
+                    @Html.TextBoxFor(m => m.NewAdName, new { @id = "NewAdName", style = "width:150px" })
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+                    Password
+                </td>
+                <td class="specialBorderLessTD">
+                    @Html.PasswordFor(m => m.NewAdPass, new { @id = "NewAdPass", style = "width:150px" })
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+                    Phone
+                </td>
+                <td class="specialBorderLessTD">
+                    @Html.TextBoxFor(m => m.NewAdPhone, new { @id = "NewAdPhone", onkeypress = "return isNumberKey(event)", style = "width:150px" })
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+                    Address
+                </td>
+                <td class="specialBorderLessTD">
+                    @Html.TextAreaFor(m => m.NewAdAddress, new { @id = "NewAdAddress", style = "width:150px" })
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+                    Designation
+                </td>
+                <td class="specialBorderLessTD">
+                    @Html.TextBoxFor(m => m.NewAdDesign, new { @id = "NewAdDesign", style = "width:150px" })
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+                    category
+                </td>
+                <td class="specialBorderLessTD">
+                    @Html.DropDownListFor(m => m.NewAdCategory, new SelectList(Model.NewAdCategory, null, null), "--select--", new { @id = "NewAdCategory", style="width:150px" })
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+                </td>
+                <td class="specialBorderLessTD">
+                    <button type="submit" id="submit" name="submit" value="submit" onclick="return AddNewAdminUserValidate()">
+                        Create</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+                    @Html.TextArea("Result", new { @id = "Result", style = "width:150px" })
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+                    @Html.ActionLink("Back to Admin Login", "Admin", "Home")
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+</body>
+</html>

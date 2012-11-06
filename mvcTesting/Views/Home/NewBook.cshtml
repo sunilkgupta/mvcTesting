@@ -1,0 +1,120 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+@{
+    ViewBag.Title = "NewBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Insert NewBook details into the Online Book Store Database:</h3>
+<html>
+<head>
+<title></title>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+    function InsertSuccessfullyMSG() {
+        if ('@ViewData["success"]' == 'true') {
+            //debugger;
+            $('#container').hide(1000);
+            //var res = document.getElementById('result').value;
+            return true;
+        }
+        else if ('@ViewData["success"]' == 'false'){
+            alert('Associated Book details already available in database, Please enter new Book details !!!');
+            location.replace('/Home/NewBook');
+            return false;
+        }
+    }
+    function ConfirmBox() {
+    //debugger
+        var Book = document.getElementById("BookName").value;
+        var Author = document.getElementById("AuthorName").value;
+        var Pub = document.getElementById("Publisher").value;
+        var ISBNId = document.getElementById("ISBN").value;
+        var Year = document.getElementById("PublishYear").value;
+        if ((Book != "") && (Author != "") && (Pub != "") && (ISBNId != "") && (Year != "")) {
+            var res = window.confirm('You are sure, want to save into database');
+            if (res == true) {
+                return true;
+            }
+            else {
+                return false;
+                location.replace('/Home/AdminWork');
+            }
+            return false;
+        }
+        else {
+           return true;
+        }
+    }
+
+</script>
+</head>
+<body onload="InsertSuccessfullyMSG();">
+@using (Html.BeginForm("NewBook","Home")) {
+    @Html.ValidationSummary(true)
+    
+        <fieldset>        
+            <legend>Create New Book</legend>
+            <div id="container" style="width:500px">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CreateBook.BookName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CreateBook.BookName)
+                @Html.ValidationMessageFor(model => model.CreateBook.BookName)
+            </div>
+            <div class="editor-label" >
+                @Html.LabelFor(model => model.CreateBook.AuthorName)
+            </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CreateBook.AuthorName)
+                    @Html.ValidationMessageFor(model => model.CreateBook.AuthorName)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CreateBook.Publisher)
+                </div>
+                <div class="editor-field" >
+                    @Html.EditorFor(model => model.CreateBook.Publisher)
+                    @Html.ValidationMessageFor(model => model.CreateBook.Publisher)
+                </div>
+                <div class="editor-label" >
+                    @*@Html.LabelFor(model => model.CreateBook.Category)*@
+                    @Html.Label("Category")
+                </div>
+                <div class="editor-field" >
+                    @*@Html.EditorFor(model => model.CreateBook.Category)*@
+                    @Html.DropDownListFor(m => m.Category, new SelectList(Model.Category, null, null), "--select--", new { @id = "Category", style = "width:200px" })
+                    @*@Html.ValidationMessageFor(model => model.CreateBook.Category)*@
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CreateBook.ISBN)
+                </div>
+                <div class="editor-field" >
+                    @Html.EditorFor(model => model.CreateBook.ISBN)
+                    @Html.ValidationMessageFor(model => model.CreateBook.ISBN)
+                </div>
+                <div class="editor-label" >
+                    @Html.LabelFor(model => model.CreateBook.PublishYear)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CreateBook.PublishYear)
+                    @Html.ValidationMessageFor(model => model.CreateBook.PublishYear)
+                </div>
+                <div style="width: 500px">
+                <br />
+                    <input type="submit" value="Create" />
+                    <input type="submit" value="Cancel" />
+                </div>                
+            </div>
+            <br />
+            <div>
+                @Html.DisplayFor(m => m.CreateBook.result, new { @id = "result", style = "font-size:larger" })
+            </div>
+        </fieldset>        
+}
+<div>
+    @Html.ActionLink("Back to Admin Work", "AdminWork")
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+
+<html>
+<head>
+<title></title>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+
+</script>
+</head>
+<body>
+@using (Html.BeginForm())
+{
+        <div id="DynamicUpdate">
+        <fieldset>
+            <legend>Admin details:</legend>
+            <table class="specialBorderLessTD">
+                <tr>
+                    <td class="specialBorderLess">
+                        Name
+                    </td>
+                    <td class="specialBorderLess">
+                        @Html.TextBoxFor(m => m.AdminSelfList2.adminName, new { @id = "adminName", style = "width:230px" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLess">
+                        Code
+                    </td>
+                    <td class="specialBorderLess">
+                        @Html.TextBoxFor(m => m.AdminSelfList2.AdminCode, new { @id = "AdminCode", style = "width:230px" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLess">
+                        Category
+                    </td>
+                    <td class="specialBorderLess">
+                        @Html.TextBoxFor(m => m.AdminSelfList2.AdminCategory, new { @id = "AdminCategory", style = "width:230px" })
+                    </td>
+                </tr>
+                @*if (@ViewData["Query2"] = 1)
+                    {*@
+                <tr id="Old">
+                    <td class="specialBorderLess">
+                        Old Password
+                    </td>
+                    <td class="specialBorderLess">
+                        @Html.TextBoxFor(m => m.AdminSelfList2.adminOldPassword, new { @id = "adminOldPassword", style = "width:230px" })
+                    </td>
+                </tr>
+                @* }*@
+                <tr>
+                    <td class="specialBorderLess">
+                        New Password
+                    </td>
+                    <td class="specialBorderLess">
+                        @Html.TextBoxFor(m => m.AdminSelfList2.adminNewPassword, new { @id = "adminNewPassword", style = "width:230px" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLess">
+                        Confirm Password
+                    </td>
+                    <td class="specialBorderLess">
+                        @Html.TextBoxFor(m => m.AdminSelfList2.adminConfirmPassword, new { @id = "adminConfirmPassword", style = "width:230px" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLess">
+                    </td>
+                    <td class="specialBorderLess">
+                        <button type="submit" name="submit" value="submit1">
+                            Update</button>@*
+                        </td>
+                        <td class="specialBorderLess">*@
+                        <button type="submit" name="submit" value="submit2">
+                            Cancel</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+}
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+@{
+    ViewBag.Title = "AdminSelfList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+<title></title>
+<script type="text/javascript" language="javascript">
+//    $(document).ready(function () {
+//        debugger;
+//        if ('Model.AdminSelfList2.QId' == 1) {
+//            $("#Old").hide();
+//        };
+//    });
+</script>
+</head>
+<body>
+@using (Html.BeginForm())
+{
+        <div>
+        <fieldset class="specialBorderLess">
+            <table class="specialBorderLessTD">
+                <tbody>
+                    <tr>
+                        <td class="specialBorderLessTD">
+                            <img src="../../Content/themes/base/images/update.jpg" alt="Banner1" height="50%"
+                                width="50%" />
+                        </td>
+                    </tr>
+                    <tr>
+                    <td class="specialBorderLess">
+                   <h4> Admin details:</h4>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td class="specialBorderLess">
+                            Name
+                        </td>
+                        <td class="specialBorderLess">
+                            @Html.TextBoxFor(m => m.AdminSelfList2.adminName, new { @id = "adminName", style = "width:230px" })
+                        </td>
+                    </tr>                   
+                    <tr>
+                        <td class="specialBorderLess">
+                            Code
+                        </td>
+                        <td class="specialBorderLess">
+                            @Html.TextBoxFor(m => m.AdminSelfList2.AdminCode, new { @id = "AdminCode", style = "width:230px" })
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td class="specialBorderLess">
+                            Category
+                        </td>
+                        <td class="specialBorderLess">
+                            @Html.TextBoxFor(m => m.AdminSelfList2.AdminCategory, new { @id = "AdminCategory", style = "width:230px" })
+                        </td>
+                    </tr>
+                   @* @if (ViewData["Query2"] == 1)
+                    { *@
+                    <tr id="Old">
+                        <td class="specialBorderLess">
+                            Old Password
+                        </td>
+                        <td class="specialBorderLess">
+                            @Html.TextBoxFor(m => m.AdminSelfList2.adminOldPassword, new { @id = "adminOldPassword", style = "width:230px" })
+                        </td>
+                    </tr>
+                   @* }*@
+                     <tr>
+                        <td class="specialBorderLess">
+                            New Password
+                        </td>
+                        <td class="specialBorderLess">
+                            @Html.TextBoxFor(m => m.AdminSelfList2.adminNewPassword, new { @id = "adminNewPassword", style = "width:230px" })
+                        </td>
+                     </tr>
+                    <tr>
+                        <td class="specialBorderLess">
+                            Confirm Password
+                        </td>
+                        <td class="specialBorderLess">
+                            @Html.TextBoxFor(m => m.AdminSelfList2.adminConfirmPassword, new { @id = "adminConfirmPassword", style = "width:230px" })
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="specialBorderLess">
+                        </td>
+                        <td class="specialBorderLess">
+                            <button type="submit" name="submit" value="submit">
+                                Update</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+}
+</body>
+</html>

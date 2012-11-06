@@ -1,0 +1,192 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+<title>@ViewBag.Title</title>
+<script type="text/javascript" language="javascript">
+    function passwordStrength(RegPassword) {
+        var desc = new Array();
+        desc[0] = "Very Weak";
+        desc[1] = "Weak";
+        desc[2] = "Better";
+        desc[3] = "Medium";
+        desc[4] = "Strong";
+        desc[5] = "Strongest";
+        var score = 0; 
+        if (RegPassword.length > 4) score++; 
+        if ((RegPassword.match(/[a-z]/)) && (RegPassword.match(/[A-Z]/))) score++;
+        if (RegPassword.match(/\d+/)) score++;
+        if (RegPassword.match(/.[!,#,$,%,^,&,*,?,_,~,-,(,)]/)) score++;
+        if (RegPassword.length > 8) score++;
+        document.getElementById("passwordDescription").innerHTML = desc[score];
+        document.getElementById("passwordStrength").className = "strength" + score;
+    }
+    function onLoad() {
+        if ('@ViewData["RegResponse"]' == 'true') {
+            alert('Successfully, account has been created. Please login.');
+            location.replace('/Home/About');
+            return true;
+        }
+        else if('@ViewData["RegResponse"]' == 'false') {
+            alert('User Name already exists, Please select new name.');
+            location.replace('/Home/Register');
+            return false;
+        }
+    }
+    function isNumberKey(evt) {
+    //debugger
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode != 43 && (charCode < 48 || charCode > 57)) {
+            alert('Only numbers are allowed as Phone/Landline numbers.');
+            return false;
+        }
+        var regPhoneLength = document.getElementById("RegPhone").value;
+        if (regPhoneLength.length > 13) {
+            alert('Maximum 13 chars are allowed.');
+            return false;
+        }
+        return true;
+    }
+    function RegisterPage() {
+        //debugger;
+        var regName = document.getElementById("RegName").value;
+        var RegUserName = document.getElementById("RegUserName").value;
+        var RegPassword = document.getElementById("RegPassword").value;
+        var RegConfirmPassword = document.getElementById("RegConfirmPassword").value;
+        var RegEMail = document.getElementById("RegEMail").value;
+        var RegAddress = document.getElementById("RegAddress").value;
+        var RegPhone = document.getElementById("RegPhone").value;
+        var RegCompany = document.getElementById("RegCompany").value;
+        var emailPattern = "[A-Za-z0-9._%+-]+@@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
+        if ((regName != '') && (RegUserName != '') && (RegPassword != '') && (RegConfirmPassword != '') && (RegEMail != '') && (RegAddress != '') && (RegPhone != '') && (RegCompany != '')) {
+            if (RegPassword == RegConfirmPassword) {
+                var match = RegEMail.search(emailPattern)
+                if (match != -1) {
+                    return true;
+                }
+                else {
+                    alert('E-Mail is incorrect, Please verify it again.');
+                    document.getElementById('RegEMail').value = '';
+                    return false;
+                }                
+            }
+            else {
+                alert('Password and confirm password are not matching');
+                location.replace('/Home/Register');
+                return false;
+            }
+        }
+        else {
+            alert('All fields with (*) are mandatory');
+            return false;
+        }
+    }
+    function CancelReg() {
+        location.replace('/Home/Display');
+        return false;
+    }
+
+</script>
+</head>
+<body onload="onLoad();">
+<div>
+@using (Html.BeginForm())
+{
+        <fieldset class="specialBorderLess">
+        <table class="specialBorderLess">
+            <tbody>
+                <tr>
+                <td class="specialBorderLessTD">
+                <img src="../../Content/themes/base/images/Register1.jpg" alt="Banner1" height="50%" width="50%" />
+                </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLessTD">
+                        *Name
+                    </td>
+                    <td class="specialBorderLessTD">
+                        @Html.TextBoxFor(m => m.RegName, new { @id = "RegName" })
+                    </td>                    
+                </tr>
+                <tr>
+                    <td class="specialBorderLessTD">
+                        *User Name
+                    </td>
+                    <td class="specialBorderLessTD">
+                        @Html.TextBoxFor(m => m.RegUserName, new { @id = "RegUserName" })
+                    </td>                             
+                </tr>
+                <tr>
+                    <td class="specialBorderLessTD">
+                        *Password
+                    </td>
+                    <td class="specialBorderLessTD">
+                        @Html.PasswordFor(m => m.RegPassword, new { @id = "RegPassword",onkeyup="passwordStrength(this.value)"})
+                    </td>
+                    <td class="specialBorderLessTD">
+                        <label for="passwordStrength"></label> 
+                        <div id="passwordDescription"></div> 
+                        <div id="passwordStrength" class="strength0"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLessTD">
+                        *Confirm Password
+                    </td>
+                    <td class="specialBorderLessTD">
+                        @Html.PasswordFor(m => m.RegConfirmPassword, new { @id = "RegConfirmPassword"})
+                    </td>                    
+                </tr>
+                <tr>
+                    <td class="specialBorderLessTD">
+                        *E-Mail
+                    </td>
+                    <td class="specialBorderLessTD">
+                        @Html.TextBoxFor(m => m.RegEMail, new { @id = "RegEMail" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLessTD">
+                        *Address
+                    </td>
+                    <td class="specialBorderLessTD">
+                        @Html.TextBoxFor(m => m.RegAddress, new { @id = "RegAddress" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLessTD">
+                        *Phone
+                    </td>
+                    <td class="specialBorderLessTD">
+                        @Html.TextBoxFor(m => m.RegPhone, new { @id = "RegPhone", onkeypress = "return isNumberKey(event)" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLessTD">
+                        *Organisation
+                    </td>
+                    <td class="specialBorderLessTD">
+                        @Html.TextBoxFor(m => m.RegCompany, new { @id="RegCompany"})
+                    </td>
+                </tr>
+                <tr>
+                    <td class="specialBorderLessTD">
+                    </td>
+                    <td class="specialBorderLessTD">
+                        <button type="submit" id="Register" value="Register" onclick="return RegisterPage()">Register</button>
+                    </td>
+                    <td class="specialBorderLessTD">
+                        <button type="submit" id="Register" value="Register" style="margin: 0 8em 0 0" onclick="return CancelReg()">Cancel</button>
+                    </td>                                       
+                </tr>                
+            </tbody>
+        </table>
+    </fieldset>
+}
+</div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>There are plently of online books available, Search and enjoy online book reading experience...</h3>
+<html>
+<head>
+<title></title>
+<script type="text/javascript" language="javascript"></script>
+<script type="text/javascript" src="../../Scripts/2012.1.419/jquery-1.6.1.min.js"></script>
+    <script src="../../Scripts/2012.1.419/hovering.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    // for mouser hovering...
+//    $(document).ready(function () {
+//        //debugger;
+//        var cont_left = $("#container").position().left;
+//        $("a img").hover(function () {
+//            // hover in
+//            $(this).parent().parent().css("z-index", 1);
+//            $(this).animate({
+//                height: "250",
+//                width: "250",
+//                left: "-=50",
+//                top: "-=50"
+//            }, "fast");
+//        }, function () {
+//            // hover out
+//            $(this).parent().parent().css("z-index", 0);
+//            $(this).animate({
+//                height: "150",
+//                width: "150",
+//                left: "+=50",
+//                top: "+=50"
+//            }, "fast");
+//        });
+
+//        $(".img").each(function (index) {
+//            var left = (index * 160) + cont_left;
+//            $(this).css("left", left + "px");
+//        });
+//    });
+    function SessionValidate() {
+        document.getElementById("BookNameInput").value = ''
+        document.getElementById("BookISBNInput").value = ''
+        document.getElementById("AuthorNameInput").value = ''
+        document.getElementById("Category").value = ''
+        return false;
+        }
+        function SearchOnLoad() {
+            if ('@ViewData["SearchLoginFailed"]' == 'false') {
+                alert("Unable to produce search result");
+                location.replace('/Home/About');
+            }
+        }
+        function SessionValidate1() {
+            if ('@Session["login"]' == '') {
+                alert("Please login as Valid User or Session/Authorization might be invalid!.");
+                location.replace('/Home/About');
+                return false;
+            }
+            return true;
+        }    
+  
+</script>
+</head>
+<body onload="SearchOnLoad();">  
+@using (Html.BeginForm())
+{
+    <div>
+    <table class="specialBorderLess">
+        <tr>
+            <td class="specialBorderLessTD">
+                Book Name:
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextBoxFor(m => m.SearchBooks.BookNameInput, new { @id = "BookNameInput" })
+            </td>
+            <td class="specialBorderLessTD">
+                ISBN No.
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextBoxFor(m => m.SearchBooks.BookISBNInput, new { @id = "BookISBNInput" })
+            </td>
+            <td class="specialBorderLessTD">
+                Author Name:
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextBoxFor(m => m.SearchBooks.AuthorNameInput, new { @id = "AuthorNameInput" })
+            </td>
+            <td class="specialBorderLessTD">
+                Category:
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.DropDownListFor(m => m.Category, new SelectList(Model.Category, null, null), "--select--", new { @id = "Category", style="width:200px" })
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+                <button type="submit" id="Search1" name="Search" value="Search1" onclick="return SessionValidate1()">
+                    Search</button>
+            </td>
+            <td class="specialBorderLessTD">
+                <button type="submit" id="Search2" name="Search" value="Search2" onclick="return SessionValidate()">
+                    Reset</button>
+            </td>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+            </td>
+        </tr>
+        <tr>
+       
+        </tr>   
+    </table>
+    </div>
+        <div>
+        <table>
+            <tr>
+                <td>
+                @(Html.Telerik().Grid(Model.SearchBooksList).Name("GridSearch").Columns(columns =>
+                {
+                    columns.Bound(m => m.BookID).Width(50);
+                    columns.Bound(m => m.BookISBN).Width(150);
+                    columns.Bound(m => m.BookName).Width(250);
+                    columns.Bound(m => m.AuthorName).Width(300);
+                    columns.Bound(m => m.publisher).Width(150);
+                    columns.Bound(m => m.BookCategory).Width(300);
+                })
+                .Pageable()
+                )
+                </td>
+            </tr>
+        </table>
+    </div>
+<div id="container">
+<table width="100%">
+    <tr class="special" style="height:180px">
+        <td>
+            <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover1.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover2.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover3.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover4.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover4.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover5.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover6.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover7.jpg" alt="Cover1" /></a></div>
+        </td>
+        @*<td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover1.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover1.jpg" alt="Cover1" /></a></div>
+        </td>*@
+    </tr>
+    <tr class="special" style="height:180px">
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover10.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover1.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover12.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover13.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover14.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover15.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover16.jpg" alt="Cover1" /></a></div>
+        </td>
+        <td>
+        <div class="img"> <a href="#"><img src="../../Content/themes/base/images/Cover17.jpg" alt="Cover1" /></a></div>
+        </td>
+    </tr>
+</table>
+</div>
+}
+</body>
+</html>
+

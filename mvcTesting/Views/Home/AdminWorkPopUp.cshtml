@@ -1,0 +1,170 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+@{
+    //Layout = null;
+    ViewBag.Title = "AdminWorkPopUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+@*<fieldset class="specialBorderLessTD">
+<h3 class="specialBorderLessTD">Please update the details of the active User</h3>
+</fieldset>*@
+<html>
+<head>
+    <title>AdminWorkPopUp</title>
+    <script language="javascript" type="text/javascript">
+        function OnloadAdminPopUp() {
+        if ('@ViewData["result"]' == 'true') {
+            alert('Successfully, Changes have been saved into Database.');
+            location.replace('/Home/AdminWork');
+        }
+        else if ('@ViewData["result"]' == 'false') {
+            alert('There is an error occured while updating account, Please try after sometimes.');
+            location.replace('/Home/AdminWork');
+        } 
+        else if ('@ViewData["delete"]' == 'false2') {
+            alert('You are not authorized to update an account, Only Global administraor can update an account.');
+            location.replace('/Home/Admin');
+        }     
+    }
+    function UpdatedIntoDataBase() {
+        var RegName = document.getElementById('RegName').value;
+        var RegEMail = document.getElementById('RegEMail').value;
+        var RegAddress = document.getElementById('RegAddress').value;
+        var RegPhone = document.getElementById('RegPhone').value;
+        var RegCompany = document.getElementById('RegCompany').value;
+        var emailPattern = "[A-Za-z0-9._%+-]+@@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
+        if ((RegName != '') && (RegEMail != '') && (RegAddress != '') && (RegPhone != '') && (RegCompany != '')) {
+            var match = RegEMail.search(emailPattern)
+            if (match != -1) {
+                var res = confirm('You would like to save the changes');
+                if (res == true) {
+                    return true;
+                }
+                else {
+                    location.replace('/Home/AdminWork');
+                    return false;
+                }
+            }
+            else {
+                alert('E-Mail is incorrect, Please verify it again.');
+                document.getElementById('RegEMail').value = '';
+                return false;
+            }            
+        }
+        else {            
+            alert('Please fill all fields Except User Name');
+            return false;
+        }
+    }
+    function CancelUpdate() {
+        var res = confirm('You would not like to save the changes');
+        if (res == true) {
+            //location.replace('/Home/AdminWorkPopup');
+            return false;
+        }
+        else {
+            location.replace('/Home/AdminWork');
+            return false;
+        }
+    }
+    function NotEditableMessage() {
+        alert('User Name can not be changed.');
+    }
+    </script>
+</head>
+<body onload="OnloadAdminPopUp();">
+@using (Html.BeginForm())
+{
+    <div>
+        <fieldset class="specialBorderLess">
+            <table class="specialBorderLessTD">
+                <tbody>
+                    <tr>
+                        <td class="specialBorderLessTD">
+                            <img src="../../Content/themes/base/images/update.jpg" alt="Banner1" height="50%"
+                                width="50%" />
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td class="specialBorderLessTD">
+                            @Html.Label("Name")
+                        </td>
+                        <td class="specialBorderLessTD">
+                            @Html.TextBoxFor(m => m.AdminWorkPopUp.RegName, new { @id = "RegName", style = "width:230px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="specialBorderLessTD">
+                            @Html.Label("User Name")
+                        </td>
+                        <td class="specialBorderLessTD">
+                            @Html.TextBoxFor(m => m.AdminWorkPopUp.RegUserName, new { @id = "RegUserName", style = "width:230px; color:gray",  @readonly = "readonly", onkeyup = "NotEditableMessage()" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="specialBorderLessTD">
+                            E-Mail:
+                        </td>
+                        <td class="specialBorderLessTD">
+                            @Html.TextBoxFor(m => m.AdminWorkPopUp.RegEMail, new { @id = "RegEMail", style = "width:230px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="specialBorderLessTD">
+                            Address:
+                        </td>
+                        <td class="specialBorderLessTD">
+                            @Html.TextAreaFor(m => m.AdminWorkPopUp.RegAddress, new { @id = "RegAddress", style = "width:230px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="specialBorderLessTD">
+                            Phone:
+                        </td>
+                        <td class="specialBorderLessTD">
+                            @Html.TextBoxFor(m => m.AdminWorkPopUp.RegPhone, new { @id = "RegPhone", style = "width:230px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="specialBorderLessTD">
+                            Company:
+                        </td>
+                        <td class="specialBorderLessTD">
+                            @Html.TextBoxFor(m => m.AdminWorkPopUp.RegCompany, new { @id = "RegCompany", style = "width:230px" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="specialBorderLessTD">
+                        </td>
+                        <td class="specialBorderLessTD">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="specialBorderLessTD">
+                        </td>
+                        <td class="specialBorderLessTD">
+                            <button type="submit" name="Update" value="Update" onclick="return UpdatedIntoDataBase()">
+                                Update</button>
+                        
+                            <button type="submit" name="Cancel" value="Cancel" style="margin:0 0em 0 8em" onclick="return CancelUpdate()">
+                                Cancel</button>
+                        </td>
+                    </tr>                    
+                    <tr>                        
+                    </tr>
+                    <tr>
+                        <td style="color:Gray" class="specialBorderLessTD">
+                            @ViewBag.Value
+                        </td>
+                        <td class="specialBorderLessTD">                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+}
+</body>
+</html>
