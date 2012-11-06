@@ -1,0 +1,113 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+@{
+    ViewBag.Title = "AdminWork";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<html>
+<head>
+<title></title>
+<script language="javascript" type="text/javascript">
+    function OnloadAdmin() {
+        //debugger
+        if ('@ViewData["delete"]' == 'true') {
+            alert('Successfully, Account has been deleted');
+            location.replace('/Home/AdminWork');
+        }
+        else if ('@ViewData["Userfalse"]' == 'false') {
+            alert('Please verify User Name, It does not exists.');
+            location.replace('/Home/AdminWork');
+        }
+        else if ('@ViewData["delete"]' == 'false1') {
+            alert('There is an error occured while deleting account, Please try after sometimes.');
+            location.replace('/Home/AdminWork');
+        }
+        else if ('@ViewData["delete"]' == 'false2') {
+            alert('You are not authorized to delete an account, Only Global administraor can delete an account.');
+            location.replace('/Home/Admin');
+        }
+    }
+    function CheckAdminSelection() {
+    //debugger
+        var select = document.getElementById('Adwork').value;
+        if (select == '') {
+            alert('Please select the user name to delete.');
+            return false;
+        }
+        else {
+            var result = confirm('You are sure, You want to delete this User')
+            if (result == true) {
+                return true;
+                }
+            else if (result == false) {
+                return false;
+                location.replace('/Home/AdminWork');                
+            }
+        }
+    }
+    function ClickMe() {
+        var select = document.getElementById('Adwork').value;
+        if (select == '') {
+            alert('Please select the user name to update.');
+            return false;
+        }        
+        return true;
+        //window.open('/Home/AdminWorkPopUp/', 'CustomerSearch', 'height=400 ,width=500,left=500', 'top=200,status=no,toolbar=no,resizable=yes,scrollbars=yes');
+        }    
+</script>
+</head>
+<body onload="OnloadAdmin();">*@
+@using (Html.BeginForm())
+{       
+    <fieldset>
+        <legend>New Admin</legend>
+        <div class="editor-label">
+            Register New Admin click @Html.ActionLink("Click Here", "AddNewAdmin", "Home")
+        </div>
+    </fieldset>
+       
+    <fieldset>
+        <legend>Update and Delete</legend>
+        <div class="editor-label">
+            Search User Name to perform Update and Delete Operations @Html.ActionLink("Click Here", "UpdateDeleteUserInAdmin","Home")
+        </div>
+        @*<div class="editor-label">
+            @(Html.Telerik().AutoComplete()
+                                   .Name("Adwork")
+                                  .BindTo(Model.userInAdminList.Select(m => m.UsrName))
+                                  .Encode(false)
+                                  .HtmlAttributes(new { style = "width:250px" })
+                 )
+        </div>
+        <div class="editor-label">
+            <button type="submit" name="submit" value="submit1" onclick="return ClickMe()">
+                Update</button>
+            <button type="submit" name="submit" value="submit2" onclick="return CheckAdminSelection()">
+                Delete</button>
+        </div>*@
+    </fieldset>
+    
+       
+    <fieldset>
+        <legend>New Book</legend>
+        <div class="editor-label">
+            Insert new book entries in database: @Html.ActionLink("Click Here", "NewBook", "Home")</div>
+    </fieldset>
+
+    
+    <fieldset>
+        <legend>Existing Book</legend>
+        <div class="editor-label">
+        Want to update/Delete existing book: @Html.ActionLink("Click Here", "UpDelBook", "Home")</div> 
+    </fieldset>
+   
+   
+    <fieldset>
+        <legend>Bulk Insert</legend>
+        <div class="editor-label">
+        Insert bulk Book Details from ExcelSheet: @Html.ActionLink("Click Here", "bulkInsertFromExcel", "Home")</div> 
+    </fieldset>
+}
+</body>
+</html>
+

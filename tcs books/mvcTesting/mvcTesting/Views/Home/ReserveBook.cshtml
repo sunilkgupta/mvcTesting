@@ -1,0 +1,39 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+@{
+    ViewBag.Title = "ReserveBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+<title>
+
+</title>
+</head>
+<body>
+<h3>List of books available in Online Book Library: </h3>
+<div>
+    <table>
+        <tr>
+            <td>
+                @(Html.Telerik().Grid(Model.TotalBookResult).Name("GridBooks").Columns(columns =>
+                 {
+
+                     columns.Bound(m => m.BookID).Width(100);
+                    columns.Bound(m => m.BookISBN).Width(200);
+                    columns.Bound(m => m.AuthorName).Width(350);
+                    columns.Bound(m => m.publisher).Width(200);
+                    columns.Bound(m => m.Year).Width(50);
+                    columns.Bound(m => m.BookCategory).Width(300);
+                                                     
+                  })
+                .Pageable()                                  
+                )                
+            </td>
+            
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

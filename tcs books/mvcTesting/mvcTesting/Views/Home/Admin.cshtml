@@ -1,0 +1,114 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<h3>Register New Admin click @Html.ActionLink("Here", "AddNewAdmin", "Home") </h3>*@
+<img src="../../Content/themes/base/images/adminnew.jpg" alt="Banner1" height="100px" width="100px"/>
+<html>
+<head>
+<title></title>
+<script type="text/javascript" language="javascript">
+function onLoadAdmin(){
+    if ('@ViewData["admin"]' == 'true') {
+        var adminDropDown = document.getElementById("adminDropDown").value;
+        var adminName = document.getElementById("AdminName").value;
+        alert('Successfully, ' + adminName + ' logged in as ' + adminDropDown + ' access');
+        location.replace('/Home/AdminWork');
+        return true;
+    }
+    else if ('@ViewData["admin"]' == 'false') {
+        alert('You are not authorised, Contact administrator.');
+        location.replace('/Home/Admin');
+    }
+//    else if ('@Session["login"]' != null) {
+//        alert('If you are as User and Admin also, Please first logout from User then login as Admin. Thanks.');
+//        location.replace('/Home/About');
+//        return false;
+//    }
+}
+function adminValidate() {
+//debugger
+    var adminName = document.getElementById("AdminName").value;
+    var adminPass = document.getElementById("AdminPassword").value;
+    var adminCode = document.getElementById("AdminCode").value;
+    var adminDropDown = document.getElementById("adminDropDown").value;
+    if ((adminName != '') && (adminPass != '') && (adminCode != 0) && (adminDropDown != '--select--')) {        
+        return true;
+    }
+    else {
+        alert('all fields are mandatory ');
+        return false;
+    }
+}
+</script>
+</head>
+<body onload="onLoadAdmin();">
+<div id="Admin">
+@using (Html.BeginForm())
+{
+    <table> 
+        <tr>
+            <td class="specialBorderLessTD">
+                <h3>
+                    Login existing admin..
+                </h3>
+            </td>
+            <td class="specialBorderLessTD">               
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+                Name
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextBoxFor(m => m.AdminName, new { @id = "AdminName" })
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+                Password
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.PasswordFor(m => m.AdminPassword, new { @id = "AdminPassword" })
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+                Code
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextBoxFor(m => m.AdminCode, new { @id = "AdminCode" })
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+                Category
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.DropDownListFor(m => m.adminDropDown, new SelectList(Model.adminDropDown, null,null), "--select--", new { @id = "adminDropDown" })
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+                <button type="submit" id="submit" name="submit" value="submit" onclick="return adminValidate()">
+                    Validate</button>
+            </td>
+        </tr>       
+        <tr>
+            <td class="specialBorderLessTD">
+                @Html.ActionLink("Admin Only", "AdminSelf", "Home")
+            </td>
+            <td class="specialBorderLessTD">
+        
+        </td>
+        </tr>
+    </table>
+    
+}
+    </div>
+    </body>
+</html>

@@ -1,0 +1,91 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+@{
+    ViewBag.Title = "About Us";
+}
+    <img src="../../Content/themes/base/images/login.jpg" alt="Login here." />
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <script type="text/javascript"  language="javascript">
+        function whileOnLoad() {
+            if ('@ViewData["Result"]' == 'true') {
+                location.replace('/Home/Display');
+            }
+            else {
+                if ('@ViewData["Result"]' == 'false') {
+                    alert('Not authetictaed, Please try again.');
+                    location.replace('/Home/About');
+                }
+            }
+        } 
+    function showLoginMessage() {
+        //debugger
+        var UserName = document.getElementById('UserName').value;
+        var Pass = document.getElementById('Password').value;
+        if ((UserName != '') && (Pass != '')) {            
+                return true;            
+        }
+        else {
+            alert("User Name/Passowrd can not be empty !!");
+            return false;
+        }
+    }
+    </script>
+</head>
+<body onload="whileOnLoad();">
+@using (Html.BeginForm())
+{
+    <table class="specialBorderLess">
+        <tr>
+            <td class="specialBorderLessTD">
+                *User Name
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextBoxFor(m => m.UserName, new { @id = "UserName" })
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+                *Password
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.PasswordFor(m => m.Password, new { @id = "Password" })
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+                <button class="txtName" name="OnClick" type="submit" onclick="return showLoginMessage()">
+                    Login</button>
+                    @Html.ActionLink("Forgot password", "forgotpassword", "Home")
+            </td>
+        </tr>
+        <tr>        
+             <td class="specialBorderLessTD">
+            @Html.ActionLink("Change password", "forgotpassword", "Home")             
+             </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+             New user registration  @Html.ActionLink("Here", "Register", "Home")
+            </td>
+        </tr>
+    </table>
+}
+</body>
+</html>
