@@ -1,0 +1,87 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+@{
+    ViewBag.Title = "AdminSelf";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+<title></title>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+//    function InsertSuccessfullyMSG1() {
+//        if ('@ViewData["Query"]' == 'load') {
+//            debugger;
+//            $('#DynamicUpdate').hide
+//            return true;
+//        }
+//        else if ('@ViewData["Query0"]' == 'Zero') {
+//            $('#DynamicUpdate').show(1000)
+//            return true;
+//        }
+//        else if ('@ViewData["Query1"]' == 'One') {
+//            $('#DynamicUpdate').show(1000)
+//            return true;
+//        }
+//    }
+    function ValidateAdminName() {
+        var adminname = document.getElementById("AdminName").value;
+        if (adminname == "") {
+            alert('Admin Name can not be null, Please verify it');
+            return false;
+        }
+        return true;
+    }
+</script>
+</head>
+<body>
+@using (Html.BeginForm())
+{
+    <fieldset>
+    <legend>Update admin details:</legend>    
+    <div>
+        <table class="specialBorderLessTD">
+            <tr class="specialBorderLessTD">
+                <td class="specialBorderLessTD">                    
+                </td>
+                <td class="specialBorderLessTD">
+                    @Html.RadioButton("adminSelection", "0", true) Forgot Password
+                </td>
+                <td class="specialBorderLessTD">
+                    @Html.RadioButton("adminSelection", "1", false) Change Password
+                </td>
+                <td class="specialBorderLessTD">
+                    @Html.RadioButton("adminSelection", "2", false) Reset/Change Unique ID
+                </td>
+                 <td class="specialBorderLessTD">
+                    @Html.RadioButton("adminSelection", "3", false) Change Admin Role
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+                Select admin name:
+                </td>
+                <td class="specialBorderLessTD">
+                    @(Html.Telerik().AutoComplete()
+                      .Name("AdminName")
+                      .BindTo(Model.AdminselfList.Select(m => m.adName))
+                      .Encode(false)
+                      .HtmlAttributes(new { style = "width:250px" })
+                    )
+                </td>
+                <td class="specialBorderLessTD">
+                    <button type="submit" name="Search" value="adminselfbutton1" onclick="return ValidateAdminName()">
+                        Proceed</button>
+                </td>
+                <td class="specialBorderLessTD">
+                <button type="submit" name="Search" value="adminselfbutton2">Cancel</button>
+                </td>
+            </tr>
+        </table>        
+    </div>
+    </fieldset>
+}
+</body>
+</html>

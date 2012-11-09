@@ -1,0 +1,15 @@
+﻿@if(@Session["login"]==null) {
+    <text>Welcome <strong> Guest </strong>!
+    [ @Html.ActionLink("Log On", "About", "Home") ]</text>
+    @*@Html.ActionLink("Login", "About", "Home")*@
+}
+else
+{
+    <text>Welcome <strong>@Session["login"] </strong>!
+    [ @Html.ActionLink("Log Off", "logout", "Home") ]</text>
+}
+@*@if (Session["Adminlogin"] != null)
+{
+    <text>Welcome <strong>@Session["Adminlogin"] as Admin</strong>!
+    [ @Html.ActionLink("Log off", "Admin", "Home") ]</text>
+}*@

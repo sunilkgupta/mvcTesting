@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="mvcTestingData">
+  <DataContextMoniker Name="/mvcTestingDataDataContext" />
+  <nestedChildShapes>
+    <classShape Id="31813fe5-ace4-4606-9b3b-1d100bb41718" absoluteBounds="0.625, 0.625, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/mvcTestingDataDataContext/InfoBook" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a75ae020-1209-4675-940a-400def731f3b" absoluteBounds="0.64000000000000012, 1.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d5199c99-9536-483a-a1a7-c648ff1a1572" absoluteBounds="5.625, 0.5, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/mvcTestingDataDataContext/NewAdmin" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8dc9b722-efd4-4e74-a1ea-d589179c4895" absoluteBounds="5.64, 0.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="20ab148b-9387-4473-92eb-dc381689d94c" absoluteBounds="1.875, 4.25, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/mvcTestingDataDataContext/DropDownValue" />
+      <nestedChildShapes>
+        <elementListCompartment Id="171048c6-9a66-4e5c-af03-fc089dc37b8c" absoluteBounds="1.8900000000000001, 4.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0f4cc08f-fa57-4266-9bf0-eb5a968e6b9a" absoluteBounds="6.75, 3.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/mvcTestingDataDataContext/COMMENT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="020d0968-50f0-4914-a34d-0e394766f2c4" absoluteBounds="6.765, 4.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f1588247-7dc9-4d18-8a94-0e64cbc812a9" absoluteBounds="3.125, 0.625, 2, 3.1170068359375">
+      <DataClassMoniker Name="/mvcTestingDataDataContext/UserRegistration" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7346cea0-8822-4b3b-aca6-246d4878ee5e" absoluteBounds="3.14, 1.085, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

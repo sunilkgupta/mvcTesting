@@ -1,0 +1,25 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1> This is my First MVC Application </h1>
+@using (Html.BeginForm("DD", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div>
+<table>
+<tr>
+<td> Please Select from List:</td>
+<td>
+
+@foreach (var response in Model.Name)
+{
+    @Html.DisplayFor(m => response)
+}
+</td>
+</tr>
+</table>
+
+</div>
+}
+

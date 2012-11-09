@@ -1,0 +1,237 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+
+
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+<title></title>
+<script type="text/javascript" language="javascript">
+    function OnLoadCommentsClick() {
+        if ('@ViewData["login"]' == 'false') {
+            alert('Please login, then only will be able to comments');
+            location.replace('/Home/About');
+            return false;
+        }
+        else if ('@ViewData["ValidInsert"]' == 'true') {
+            var res = confirm('You are sure, you want to save the comments');
+            if (res == true) {
+                alert('Thank You. Successfully, Comments has been submitted. You will be notified soon');
+                $('#commentsDiv').hide(1000);
+            }
+            return false;
+        }
+        else if ('@ViewData["ValidInsert"]' == 'false') {
+            alert('Error occured while submitting comments, Please try later')
+            return false;
+        }
+        else if ('@ViewData["LoadComments"]' == 'false') {
+            alert('Unable to load comments, Please try later!!!');
+            return false;
+        }
+    }
+
+    function CommentsClick() {
+        var ComName = document.getElementById('ComName').value;
+        var ComEMail = document.getElementById('ComEMail').value;
+        var ComLocation = document.getElementById('ComLocation').value;
+        var ComComments = document.getElementById('ComComments').value;
+        var emailPattern = "[A-Za-z0-9._%+-]+@@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
+        if ((ComName != '') && (ComEMail != '') && (ComLocation != '') && (ComComments != '')) {
+            var match = ComEMail.search(emailPattern);
+            if (match != -1) {
+                return true;
+            }
+            else {
+                alert('E-Mail address is incorrect, Please verify it.');
+                document.getElementById('ComEMail').value = '';
+                document.getElementById('ComEMail').focus();                
+                return false;
+            }
+        }
+        else {
+            alert('All fields are mandatory, Please fill all fields');
+            return false;
+        }
+    }
+    function CommentsCancelClick() {
+        location.replace('/Home/Display');
+        return false;
+    }
+    function CommentsLenth() {
+    //debugger
+        var res = document.getElementById('ComComments').value;
+        if(res.length >= 500){
+            alert('Plaese note, Maximum 500 characters are allowed in comments');
+            document.getElementById('ComComments').value = '';
+            return false;
+        }
+        return true;
+    }
+
+</script>
+</head>
+<body onload="OnLoadCommentsClick();">
+
+@using (Html.BeginForm())
+{
+<div id="AdminWorkDiv">
+    <div>
+        <table class="specialBorderLessTD">
+            <tr class="specialBorderLessTD">
+                <td class="specialBorderLessTD">                                           
+                      <img src="../../Content/themes/base/images/about_us.png" alt="Cover2" height="50%" width="50%"/>                    
+                </td>
+            </tr>
+        </table>
+    </div>
+    <table class="specialBorderLessTD">
+        <tr>
+            <td class="specialBorderLessTD">
+                <h3 style="margin:0em 0 .2em 0; padding:0em 0 0 0">
+                    About us
+                </h3>
+            </td>           
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD" style="width: 600px">
+                An on-line book is a resource in book-like form that is only available to read online.
+                It differs from the common idea of an ebook, which is usually available to download
+                and read locally or on an ebook reader.
+            </td>
+        </tr>
+        </table>
+        </div>
+    <div id="commentsDiv">
+    <table class="specialBorderLessTD">
+        <tr>
+            <td class="specialBorderLessTD">
+                <h4>
+                    Comments Us:</h4>
+            </td>
+        </tr>
+        <tr class="specialBorderLessTD">
+            <td class="specialBorderLessTD">
+                Name
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextBoxFor(m => m.Comments.ComName, new { @id = "ComName" })
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+                E-Mail
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextBoxFor(m => m.Comments.ComEMail, new { @id = "ComEMail" })
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+                Location
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextBoxFor(m => m.Comments.ComLocation, new { @id = "ComLocation" })
+            </td>            
+        </tr>
+        <tr>
+        <td class="specialBorderLessTD"></td>
+        <td class="specialBorderLessTD", style="color:Gray">
+            @*@Html.Label("(Optional)")*@
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+                Commnets
+            </td>
+            <td class="specialBorderLessTD">
+                @Html.TextAreaFor(m => m.Comments.ComComments, new { @id = "ComComments", style = "width:300px", onkeyup = "CommentsLenth()" })                
+            </td>                       
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+            </td>
+            <td style="color:Gray", class="specialBorderLessTD">
+                @Html.Label("(Maximum 500 characters are allowed)")
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+                <button type="submit" value="submit" name="submit" style="margin: 0 8em 0 0" onclick="return CommentsClick()">
+                    Submit</button>
+                <button type="submit" value="Cancel" name="Cancel" onclick="return CommentsCancelClick()">
+                    Cancel</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="specialBorderLessTD">
+            </td>
+            <td class="specialBorderLessTD">
+                @*@Html.Label("Response")*@
+            </td>
+        </tr>
+    </table>
+    </div>
+           //For Comments
+           
+    <h3>All Comments</h3>
+    <table class="display">
+        <thead>
+            <tr>
+                <th style="width:300px">
+                   Name
+                </th>
+                <th style="width:300px">
+                    Date
+                </th>
+                <th>
+                    Comments
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CommentList)
+            {
+                <tr>
+                    <td>
+                        @item.ShowName
+                    </td>
+                    <td>
+                        @item.ShowDate
+                    </td>
+                    <td>
+                        @item.ShowComments
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <table class="specialBorderLessTD">
+            <tr>
+                <td class="specialBorderLessTD">
+                    <h4 style="margin: 5em 0 0 0; padding: 0em 0 0 0">
+                        Please reach out to us for any further query:</h4>
+                </td>
+            </tr>
+            <tr>
+                <td class="specialBorderLessTD">
+<pre>
+#31 Main, 30 Cross,
+Rose Garden,                    
+JP Nagar, 6th Phase                    
+Bangalore - 78 Karnatka,
+India                    
+PH:- 080672540601
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+</body>
+</html>

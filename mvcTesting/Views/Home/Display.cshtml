@@ -1,0 +1,188 @@
+﻿@model mvcTesting.Models.mvcTestingModel
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+<title></title>
+
+<script type="text/javascript"></script>
+<script type="text/javascript" src="../../Scripts/2012.1.419/jquery-1.6.1.min.js"></script>
+<script src="../../Scripts/2012.1.419/hovering.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+//    // for mouser hovering...
+//    $(document).ready(function () {
+//        //debugger;
+//        var cont_left = $("#container").position().left;
+//        $("a img").hover(function () {
+//            // hover in
+//            $(this).parent().parent().css("z-index", 1);
+//            $(this).animate({
+//                height: "150",
+//                width: "150",
+//                left: "-=50",
+//                top: "-=50"
+//            }, "fast");
+//        }, function () {
+//            // hover out
+//            $(this).parent().parent().css("z-index", 0);
+//            $(this).animate({
+//                height: "120",
+//                width: "120",
+//                left: "+=50",
+//                top: "+=50"
+//            }, "fast");
+//        });
+
+//        $(".img").each(function (index) {
+//            var left = (index * 160) + cont_left;
+//            $(this).css("left", left + "px");
+//        });
+//    });
+
+</script>
+</head>
+<body>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <table style="width:100%" class="specialBorderLess">
+            <tr class="specialBorderLess">
+                <td align="center" class="specialBorderLess">
+                    <h3>
+                        Where books and people meet! @Html.ActionLink("Join Now", "Register", "Home") If already registered, Please @Html.ActionLink("Login", "About", "Home") here..</h3>
+                </td>                
+            </tr>
+        </table>
+    </div>
+    <br />
+    <fieldset class="fieldPadding">
+    <legend style="font-size:small">Great Writers</legend>
+    <div id="container">
+        <table  style="height:180px">
+            <tr class="special">
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/mark-twain_large.jpg" alt="Cover1" /></a></div>
+                </td>                        
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/william-shakespeare_large.jpg" alt="Cover2" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/Cover20.jpg" alt="Cover3" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/charles-dickens_large.jpg" alt="Cover4"  /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/Cover13.jpg" alt="Cover5" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/edgar-allan-poe_large.jpg" alt="Cover5" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/Cover18.jpg" alt="Cover5" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/Cover1.jpg" alt="Cover5" /></a></div>
+                </td>       
+            </tr>
+        </table>
+    </div>
+</fieldset>
+    <div>
+        <p>
+            An on-line book is a resource in book-like form that is only available to read online.
+            It differs from the common idea of an ebook, which is usually available to download
+            and read locally or on an ebook reader.
+        </p>
+        <hr />
+    </div>
+    <div>
+    <p>
+                information is presented in pages
+                pages are normally read sequentially (though flipping to another page is possible)
+                pages are read passively, with little or no interaction or multimedia
+    </p>
+    <hr />
+    </div>
+    <br />
+    <fieldset class="fieldPadding">
+    <legend style="font-size:small">Great Books</legend>
+    <div id="container">
+        <table  style="height:180px">
+            <tr class="special">
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/images1.jpg" alt="Cover1" /></a></div>
+                </td>                        
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/images2.jpg" alt="Cover2" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/images3.jpg" alt="Cover3" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/images4.jpg" alt="Cover4"  /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/images5.jpg" alt="Cover5" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/Cover3.jpg" alt="Cover5" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/images6.jpg" alt="Cover5" /></a></div>
+                </td>
+                <td>
+                    <div class="img">
+                        <a href="#">
+                            <img src="../../Content/themes/base/images/images7.jpg" alt="Cover5" /></a></div>
+                </td>       
+            </tr>
+        </table>
+    </div>
+</fieldset>
+ <hr />
+    <div>
+    <p>
+    Online means the content may only be read while the reader is online.</p>
+    <p>
+    Thus the reader's experience is similar to reading a printed book, except that the
+    book is read at a computer and is only accessible while the reader is online</p>
+    </div>
+    <hr />    
+}
+</body>
+</html>
