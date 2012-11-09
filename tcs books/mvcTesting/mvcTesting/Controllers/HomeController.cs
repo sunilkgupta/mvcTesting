@@ -99,6 +99,7 @@ namespace mvcTesting.Controllers
             mvcModel.adminDropDown = mvcDB.getAdminDropDownList();
             return View(mvcModel);
         }
+        static int count = 0;
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Admin(mvcTestingModel mvcModel, string adminDropDown)
         {
@@ -113,6 +114,11 @@ namespace mvcTesting.Controllers
             }
             else
             {
+                count = count + 1;
+                if (count >= 3)
+                {
+                    ViewData["Locked"] = count;
+                }
                 Session["Adminlogin"] = " ";
                 ViewData["admin"] = "false";
             }

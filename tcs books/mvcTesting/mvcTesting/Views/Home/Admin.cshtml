@@ -10,7 +10,8 @@
 <head>
 <title></title>
 <script type="text/javascript" language="javascript">
-function onLoadAdmin(){
+    function onLoadAdmin() {
+        debugger;
     if ('@ViewData["admin"]' == 'true') {
         var adminDropDown = document.getElementById("adminDropDown").value;
         var adminName = document.getElementById("AdminName").value;
@@ -18,15 +19,15 @@ function onLoadAdmin(){
         location.replace('/Home/AdminWork');
         return true;
     }
+    else if ('@ViewData["Locked"]' == 3) {
+        alert('You account has been locked, Please contact admin.');
+        //location.replace('/Home/Display');
+        return false;
+    }    
     else if ('@ViewData["admin"]' == 'false') {
         alert('You are not authorised, Contact administrator.');
         location.replace('/Home/Admin');
-    }
-//    else if ('@Session["login"]' != null) {
-//        alert('If you are as User and Admin also, Please first logout from User then login as Admin. Thanks.');
-//        location.replace('/Home/About');
-//        return false;
-//    }
+    }    
 }
 function adminValidate() {
 //debugger
@@ -100,7 +101,7 @@ function adminValidate() {
         </tr>       
         <tr>
             <td class="specialBorderLessTD">
-                @Html.ActionLink("Admin Only", "AdminSelf", "Home")
+                @*@Html.ActionLink("Admin Only", "AdminSelf", "Home")*@
             </td>
             <td class="specialBorderLessTD">
         
