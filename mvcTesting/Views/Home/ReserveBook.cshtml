@@ -7,10 +7,29 @@
 <html>
 <head>
 <title>
-
 </title>
+<script type="text/jscript" language="javascript">
+    function SelectBook() {
+        var n = $("input:checked").length;
+        if (n >= 2) {
+            alert('Total books selected ' + n + ', Please select only one book to go next...')
+            location.replace('/Home/ReserveBook');
+            return false;
+        }
+        else if (n == 0) {
+            alert('Please select at least one book to go next...')
+            return false;
+        }
+        else {
+            return true;
+        }
+    }   
+
+</script>
 </head>
 <body>
+@using (Html.BeginForm())
+{
 <h3>List of books available in Online Book Library: </h3>
 <div>
     <table>
@@ -19,15 +38,24 @@
                 @(Html.Telerik().Grid(Model.TotalBookResult).Name("GridBooks").Columns(columns =>
                  {
 
-                     columns.Bound(m => m.BookID).Width(100);
-                    columns.Bound(m => m.BookISBN).Width(200);
-                    columns.Bound(m => m.AuthorName).Width(350);
-                    columns.Bound(m => m.publisher).Width(200);
-                    columns.Bound(m => m.Year).Width(50);
-                    columns.Bound(m => m.BookCategory).Width(300);
-                                                     
-                  })
-                .Pageable()                                  
+                     columns.Template(
+                    @<text>
+                    <input name="checkedRecords"  id="checkedRecords" type="checkbox" value="@item.BookID " title="checkedRecords" 
+                        @if ("checkedRecords".Contains(item.BookID))
+                        {
+                            <text>checked="checked"</text>
+                        }
+                    />
+                    </text>)
+                    .Title("Select").Width(36).HtmlAttributes(new { style = "text-align:left" });
+                     columns.Bound(m => m.BookISBN).Width(200);
+                     columns.Bound(m => m.AuthorName).Width(350);
+                     columns.Bound(m => m.publisher).Width(200);
+                     columns.Bound(m => m.Year).Width(50);
+                     columns.Bound(m => m.BookCategory).Width(300);
+
+                 })
+                .Pageable()
                 )                
             </td>
             
@@ -35,5 +63,12 @@
     </table>
 
 </div>
+    <div align="right">        
+         <button type="submit" name="Next" value="Next" onclick="return SelectBook()" >Go Next</button>        
+    </div>    
+    <div id="msg">
+        @Html.Display("Result") 
+    </div>
+}
 </body>
 </html>

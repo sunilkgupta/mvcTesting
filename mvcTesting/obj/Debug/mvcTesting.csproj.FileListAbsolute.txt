@@ -57,3 +57,10 @@ C:\Users\sunilkumar\Downloads\tcs books\tcs books\mvcTesting\mvcTesting\bin\Enti
 C:\Users\sunilkumar\Downloads\tcs books\tcs books\mvcTesting\mvcTesting\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\sunilkumar\Downloads\tcs books\tcs books\mvcTesting\mvcTesting\obj\Debug\mvcTesting.dll
 C:\Users\sunilkumar\Downloads\tcs books\tcs books\mvcTesting\mvcTesting\obj\Debug\mvcTesting.pdb
+C:\Users\sunilkumar\Downloads\tcs books\mvcTesting\bin\mvcTesting.dll
+C:\Users\sunilkumar\Downloads\tcs books\mvcTesting\bin\mvcTesting.pdb
+C:\Users\sunilkumar\Downloads\tcs books\mvcTesting\bin\EntityFramework.dll
+C:\Users\sunilkumar\Downloads\tcs books\mvcTesting\bin\EntityFramework.xml
+C:\Users\sunilkumar\Downloads\tcs books\mvcTesting\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\sunilkumar\Downloads\tcs books\mvcTesting\obj\Debug\mvcTesting.dll
+C:\Users\sunilkumar\Downloads\tcs books\mvcTesting\obj\Debug\mvcTesting.pdb

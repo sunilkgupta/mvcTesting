@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="sunil" Class="mvcTestingDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=hp-pc;Initial Catalog=sunil;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="sunilkumar" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=GENSD-11;Initial Catalog=sunil;Integrated Security=True;Persist Security Info=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="sunilkumar" Provider="System.Data.SqlClient" />
   <Table Name="dbo.InfoBook" Member="InfoBooks">
     <Type Name="InfoBook">
       <Column Name="BID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
@@ -245,5 +245,24 @@
     <Parameter Name="ISBN" Parameter="iSBN" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="PublishYear" Parameter="publishYear" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetImgaes" Method="GetImgaes">
+    <Parameter Name="BookId" Parameter="bookId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="GetImgaesResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BookID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BookImage" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="Description1" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Description2" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Description3" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="TotalBooks" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetOnlyImage" Method="GetOnlyImage">
+    <Parameter Name="BookId" Parameter="bookId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="GetOnlyImageResult">
+      <Column Name="BookImage" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>

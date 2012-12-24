@@ -7,19 +7,18 @@
 <html>
 <head>
 <title></title>
+<link rel="stylesheet" type="text/css" href="../../Content/Site.css" />
 <script type="text/javascript" language="javascript">
+
     function AddNewAdminValidate() {
         //debugger
-        //document.getElementById('commentsDiv').style.visibility = 'hidden';
+        $('#TextArea').hide();
+        $('#TextArea1').hide();
         if ('@ViewData["newadmin"]' == 'true') {
             alert('Successfully account has been created, Please Note down System Generated Admin Code');
-            document.getElementById("Result").value = 'Please remember it, This is your Admin Code ' + '@ViewBag.Value';
-            document.getElementById("NewAdName").value ='';
-            document.getElementById("NewAdPass").value = '';
-            document.getElementById("NewAdPhone").value = '';
-            document.getElementById("NewAdAddress").value = '';
-            document.getElementById("NewAdDesign").value = '';
-            document.getElementById("NewAdCategory").value = '';
+            $('#admin').hide(1000);
+            $('#TextArea').show();
+            $("p").prepend("Please remember it, This is your Admin Code" + " @ViewBag.Value");
         }
         else if ('@ViewData["newadmin"]' == 'false') {
             alert('Admin name aleardy exists, Please select new name');
@@ -27,8 +26,11 @@
             return false;
         }
         else if ('@ViewData["newadmin"]' == 'false1') {
-            alert('You are not authorized to create an account, Only Global administraor can create an account.');
-            location.replace('/Home/Admin');
+            //            alert('You are not authorized to create an account, Only Global administraor can create an account.');
+            $('#admin').hide(1000);
+            $("p").prepend('You are not authorized to create an account, Only Global administraor can create an account.');
+            //location.replace('/Home/Admin');
+            $('#TextArea1').show();
             return false;
         }
     }
@@ -66,10 +68,11 @@
 </script>
 </head>
 <body onload="AddNewAdminValidate();">
-<h2>Create new admin account here....</h2>
+
 @using (Html.BeginForm())
 {
     <div id="admin">
+        <h2>Create new admin account here....</h2>
         <table class="specialBorderLessTD">
             <tr>
                 <td class="specialBorderLessTD">
@@ -126,10 +129,35 @@
                     <button type="submit" id="submit" name="submit" value="submit" onclick="return AddNewAdminUserValidate()">
                         Create</button>
                 </td>
+            </tr> 
+            <tr>
+                <td class="specialBorderLessTD">
+                    @Html.ActionLink("Back to Admin Login", "Admin", "Home")
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <div id="TextArea">
+        <table class="specialBorderLessTD">
+            <tr class="specialBorderLessTD">
+                <td class="specialBorderLessTD">
+                    <h3>Congratualtions, successfully account has been created.</h3>
+                    <p> </p>
+                </td>
             </tr>
             <tr>
                 <td class="specialBorderLessTD">
-                    @Html.TextArea("Result", new { @id = "Result", style = "width:150px" })
+                    @Html.ActionLink("Back to Admin Login", "Admin", "Home")
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="TextArea1">
+        <table class="specialBorderLessTD">
+            <tr class="specialBorderLessTD">
+                <td class="specialBorderLessTD">                    
+                    <p> </p>
                 </td>
             </tr>
             <tr>

@@ -112,6 +112,8 @@ namespace mvcTesting.Models
         public CreateBook CreateBook { get; set; }
 
         public List<string> CategoryList { get; set; }
+
+        public SelectedBook SelectedBook { get; set; }
     }    
     public class AdminWorkPopUp
     {
@@ -235,8 +237,16 @@ namespace mvcTesting.Models
         public int PublishYear { get; set; }
 
         public string result { get; set; }
-
-
+    }
+    public class SelectedBook
+    {
+        public string BookID { get; set; }
+        public byte Image { get; set; }
+        public string Des1 { get; set; }
+        public string Des2 { get; set; }
+        public string Des3 { get; set; }
+        public int TotalBooks { get; set; }
+        public decimal Price { get; set; }
     }
 
 }

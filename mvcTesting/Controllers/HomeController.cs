@@ -9,6 +9,7 @@ using System.Web.SessionState;
 using Telerik.Web.Mvc;
 using System.Threading;
 using System.Net.Mail;
+using System.Data;
 
 
 
@@ -316,21 +317,40 @@ namespace mvcTesting.Controllers
             }
             return View();
         }
-        [GridAction]
-        public ActionResult ReserveBook()
+        //[GridAction]
+        public ActionResult ReserveBook(mvcTestingModel mvcModel)
         {
             mvcTestingDB mvcDB = new mvcTestingDB();
-            mvcTestingModel mvcModel = new mvcTestingModel();
             mvcModel.TotalBookResult = mvcDB.allBooksList();
             Session["gridlist"] = mvcModel.TotalBookResult;
             return View(mvcModel);
         }
-        //[GridAction]
-        //public ActionResult _ReserveBook()
-        //{
-        //    return View(new GridModel<ReserveBooks> { Data = Session["gridlist"] });
+        [AcceptVerbs(HttpVerbs.Post)]
+        [GridAction]
+        public ActionResult ReserveBook(string checkedRecords, string Next)
+        {
+            if (Next == "Next" && checkedRecords != null)
+            {
+                return RedirectToAction("SelectedBook", "Home", new { book = checkedRecords });
+            }
+            return View();
+        }
 
-        //}
+        //For selected books....
+        public ActionResult SelectedBook(mvcTestingModel mvcModel)
+        {
+            mvcTestingDB mvcDB = new mvcTestingDB();
+            string response = Request.QueryString["book"].ToString();
+            mvcModel.SelectedBook = mvcDB.GetImgaesBook(response);
+            return View(mvcModel);
+        }
+        public ActionResult SelectedBook()
+        {
+            return View();
+        }
+
+
+
         public ActionResult ErrorPage()
         {
             return View();
@@ -455,21 +475,21 @@ namespace mvcTesting.Controllers
             }
             return View (mvcModel);
         }
-        //public ActionResult AdminSelfList(mvcTestingModel mvcModel)
-        //{
-        //    mvcTestingDB mvcDB = new mvcTestingDB();
-        //    ViewData["Query1"] = Request.QueryString["name"];
-        //    //mvcModel.AdminSelfList2.QName = Request.QueryString["name"].ToString();
-        //    //mvcModel.AdminSelfList2.QId = Convert.ToInt32(Request.QueryString["id"]);
-        //    ViewData["Query2"] = Convert.ToInt32(Request.QueryString["id"]);
-        //    mvcModel.AdminSelfList2 = mvcDB.AllAdminListRow(ViewData["Query1"].ToString());
-        //    return View(mvcModel);
-        //}
-        //[AcceptVerbs(HttpVerbs.Post)]
-        //public ActionResult AdminSelfList(mvcTestingModel mvcModel, AdminSelfList AdminSelfList1)
-        //{
-        //    return View();
-        //}
+        public ActionResult AdminSelfList(mvcTestingModel mvcModel)
+        {
+            mvcTestingDB mvcDB = new mvcTestingDB();
+            ViewData["Query1"] = Request.QueryString["name"];
+            //mvcModel.AdminSelfList2.QName = Request.QueryString["name"].ToString();
+            //mvcModel.AdminSelfList2.QId = Convert.ToInt32(Request.QueryString["id"]);
+            ViewData["Query2"] = Convert.ToInt32(Request.QueryString["id"]);
+            mvcModel.AdminSelfList2 = mvcDB.AllAdminListRow(ViewData["Query1"].ToString());
+            return View(mvcModel);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AdminSelfList(mvcTestingModel mvcModel, AdminSelfList AdminSelfList1)
+        {
+            return View();
+        }
 
         public ActionResult AdminSelfDetails(mvcTestingModel mvcModel)
         {

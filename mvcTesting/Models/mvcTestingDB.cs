@@ -10,7 +10,6 @@ using System;
 using System.Data.Entity;
 using System.Web.Mvc;
 
-
 namespace mvcTesting.Models
 {
     public class mvcTestingDB : DbContext
@@ -235,6 +234,20 @@ namespace mvcTesting.Models
             int result = 100;
             result = dataDB.InsertSingleBook(BookName, AuthorName, Publisher, Category, ISBN, PublishYear);
             return result;
+        }        
+        public SelectedBook GetImgaesBook(string BookId)
+        {
+            SelectedBook select = new SelectedBook();
+            ISingleResult<GetImgaesResult> data = dataDB.GetImgaes(BookId);
+            foreach (var res in data)
+            {
+                select.BookID = res.BookID;
+                select.Des1 = res.Description1;
+                select.Des2 = res.Description2;
+                select.Des3 = res.Description3;
+                select.Price = Convert.ToDecimal(res.Price);
+            }
+            return select;
         }
     }
 }
